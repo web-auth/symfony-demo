@@ -31,10 +31,15 @@ services:
     App\Security\LogoutSuccessHandler: ~
     App\Security\AuthenticationFailureHandler: ~
     App\Security\AuthenticationSuccessHandler: ~
+    App\Security\CreationSuccessHandler: ~
     App\Validator\Constraints\UniqueUsernameValidator: ~
     App\EventListener\LastLoginAt:
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+    App\EventListener\LoginAfterRegistration:
+        autowire: true
+        tags:
+            - { name: kernel.event_listener, event: Webauthn\Bundle\Event\PublicKeyCredentialSourceRegistrationCompleted }
 
     Nyholm\Psr7\Factory\Psr17Factory: ~
 

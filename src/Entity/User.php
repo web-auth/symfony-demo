@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,9 +53,9 @@ class User implements UserInterface
      */
     private $last_login_at;
 
-    public function __construct()
+    public function __construct(string $id)
     {
-        $this->id = Uuid::uuid4()->toString();
+        $this->id = $id;
         $this->created_at = new \DateTimeImmutable();
     }
 

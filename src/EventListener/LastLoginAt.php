@@ -29,7 +29,7 @@ class LastLoginAt
         $this->userRepository = $userRepository;
     }
 
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function __invoke(InteractiveLoginEvent $event)
     {
         /** @var User $user */
         $user = $event->getAuthenticationToken()->getUser();

@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
-import { connect } from 'react-redux'
+import React, {Fragment} from 'react'
+import {connect} from 'react-redux'
 import Notifier from 'app/components/Notifier/Notifier'
 
-import { Route, Redirect, Router, Switch } from 'react-router-dom'
+import {Route, Redirect, Router, Switch} from 'react-router-dom'
 
 import AuthenticationChecker from 'app/components/AuthenticationChecker/AuthenticationChecker'
 import ProtectedRoute from 'app/components/ProtectedRoute/ProtectedRoute'
@@ -11,7 +11,7 @@ import ProfilePage from 'app/views/ProfilePage/ProfilePage.jsx'
 import RegisterPage from 'app/views/RegisterPage/RegisterPage.jsx'
 import LoginPage from 'app/views/LoginPage/LoginPage.jsx'
 import LogoutPage from 'app/views/LogoutPage/LogoutPage.jsx'
-import { createBrowserHistory } from 'history'
+import {createBrowserHistory} from 'history'
 
 const hist = createBrowserHistory(),
     App = () => {
@@ -19,31 +19,31 @@ const hist = createBrowserHistory(),
             <Fragment>
                 <AuthenticationChecker />
                 <Notifier />
-                <Router history={ hist }>
+                <Router history={hist}>
                     <Switch>
-                        <ProtectedRoute path="/profile" exact component={ ProfilePage } />
+                        <ProtectedRoute path="/profile" exact component={ProfilePage} />
                         <Route
-                            component={ RegisterPage }
+                            component={RegisterPage}
                             exact
                             path="/register"
                         />
                         <Route
-                            component={ LogoutPage }
+                            component={LogoutPage}
                             exact
                             path="/logout"
                         />
-                        <Route component={ LoginPage } exact path="/login" />
-                        <Route path="/" exact component={ Homepage } />
+                        <Route component={LoginPage} exact path="/login" />
+                        <Route path="/" exact component={Homepage} />
                         <Redirect to='/' />
                     </Switch>
                 </Router>
             </Fragment>
         )
-    }
+    };
 
-function mapStateToProps( state ) {
-    const { auth } = state
-    return { authentication: auth }
+function mapStateToProps(state) {
+    const {auth} = state;
+    return {authentication: auth}
 }
 
-export default connect( mapStateToProps )( App )
+export default connect(mapStateToProps)(App)

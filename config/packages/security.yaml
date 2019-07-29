@@ -19,6 +19,12 @@ security:
                 failure_handler: App\Security\AuthenticationFailureHandler
                 http_message_factory: 'Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory'
                 #fake_user_entity_provider: 'App\Provider\PublicKeyCredentialFakeUserEntityProvider'
+                registration:
+                    enabled: true
+                    profile: default
+                    options_path: /api/register/options
+                    registration_path: /api/register
+                    success_handler: App\Security\CreationSuccessHandler
             logout:
                 path: /api/logout
                 success_handler: App\Security\LogoutSuccessHandler

@@ -6,31 +6,30 @@ import {logout} from 'app/store/actions/authenticationActions';
 class AuthenticationChecker extends Component {
   checkAuthenticationStatus = () => {
       const data = sessionStorage.getItem('authentication_data');
-      if (data) {
-          fetch('/api/profile', {
-              method: 'GET',
-              credentials: 'same-origin',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
+      fetch('/api/profile', {
+          method: 'GET',
+          credentials: 'same-origin',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      })
+          .then(response => {
+              return response.json();
           })
-              .then(response => {
-                  return response.json();
-              })
-              .then(json => {
-                  if (json.status === 'error') {
-                      this.props.logout();
-                  }
-              })
-              .catch(err => {
+          .then(json => {
+              if (json.status === 'error') {
                   this.props.logout();
-              });
-          return;
-      }
+              }
+          })
+          .catch(err => {
+              this.props.logout();
+          });
 
-      const {isAuthenticated} = this.props;
-      if (isAuthenticated) {
-          this.props.logout();
+      if (data) {
+          const {isAuthenticated} = this.props;
+          if (isAuthenticated) {
+              this.props.logout();
+          }
       }
   };
 
